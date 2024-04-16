@@ -1,0 +1,54 @@
+data:
+  dataset: ABIDE
+  atlas: cc200
+  batch_size: 16
+  test_batch_size: 16
+  val_batch_size: 16
+  train_set: 0.8
+  val_set: 0.2
+  fold: 0
+  time_seires: data/adni_cn_ad.npy
+  # time_seires: data/adni_cn_mci.npy
+  # time_seires: data/adni_mci_ad.npy 
+
+
+
+  # time_seires: D:/data/ad/ad_AD_CN.npy
+  # time_seires: D:/work/PLSMGCN/data/CodeGoat24/FBNETGEN_cc200/ABIDE_pcp/abide.npy
+  # time_seires: D:/work/PLSNet-main/data/CodeGoat24/FBNETGEN_cc200/ABIDE_pcp/abide.npy
+#  time_seires: /data/CodeGoat24/FBNETGEN_ho/ABIDE_pcp/abide.npy
+  # time_seires: /data/CodeGoat24/FBNETGEN_AAL/ABIDE_pcp/abide.npy
+#  time_seires: /data/CodeGoat24/FBNETGEN_cc400/ABIDE_pcp/abide.npy
+
+
+
+
+model:
+  type: PLSNet
+  extractor_type: attention
+  embedding_size: 8
+  window_size: 4
+
+  cnn_pool_size: 16
+
+  num_gru_layers: 4
+
+  dropout: 0.5
+
+
+
+train:
+  lr: 1.0e-4
+  weight_decay: 1.0e-4
+  epochs: 500
+  pool_ratio: 0.7
+  optimizer: adam
+  stepsize: 200
+
+  group_loss: true
+  sparsity_loss: true
+  sparsity_loss_weight: 0.5e-4
+  log_folder: result
+  
+  # uniform or pearson
+  pure_gnn_graph: pearson
