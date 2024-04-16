@@ -1,5 +1,5 @@
 data:
-  dataset: ABIDE
+  dataset: ADNI
   atlas: cc200
   batch_size: 16
   test_batch_size: 16
@@ -11,20 +11,8 @@ data:
   # time_seires: data/adni_cn_mci.npy
   # time_seires: data/adni_mci_ad.npy 
 
-
-
-  # time_seires: D:/data/ad/ad_AD_CN.npy
-  # time_seires: D:/work/PLSMGCN/data/CodeGoat24/FBNETGEN_cc200/ABIDE_pcp/abide.npy
-  # time_seires: D:/work/PLSNet-main/data/CodeGoat24/FBNETGEN_cc200/ABIDE_pcp/abide.npy
-#  time_seires: /data/CodeGoat24/FBNETGEN_ho/ABIDE_pcp/abide.npy
-  # time_seires: /data/CodeGoat24/FBNETGEN_AAL/ABIDE_pcp/abide.npy
-#  time_seires: /data/CodeGoat24/FBNETGEN_cc400/ABIDE_pcp/abide.npy
-
-
-
-
 model:
-  type: PLSNet
+  name: KMGCN
   extractor_type: attention
   embedding_size: 8
   window_size: 4
