@@ -17,36 +17,7 @@ from dataloader import init_dataloader
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 os.environ["CUDA_VISIBLE_DEVICES"] = "0, 1"
 
-def test(model, dataloader, path):
-        # self.model.load_state_dict(torch.load('best_model/1_github/cn_ad/best_val_model_0.90625_128%.pth'))
-        model.load_state_dict(torch.load(path))
-        labels = []
-        result = []
-        pred = []
-
-        model.eval()
-
-        for data_in, pearson, pcorr, label, pseudo, ages, genders in dataloader:
-            label = label.long()
-            data_in, pearson, pcorr, label, pseudo, ages, genders = data_in.to(device), pearson.to(device), pcorr.to(device), label.to(device), pseudo.to(device), ages.to(device), genders.to(device)
-            output = model(data_in, pearson, pcorr, pseudo, ages, genders)
-
-            result += F.softmax(output, dim=1)[:, 1].tolist()
-            pred += torch.argmax(F.softmax(output, dim=1), dim=1).tolist()
-            labels += label.tolist()
-
-        acc = accuracy_score(labels, pred)
-        pre = precision_score(labels, pred)
-        auc = sklearn.metrics.roc_auc_score(np.squeeze(labels), np.squeeze(pred))
-        tn, fp, fn, tp = confusion_matrix(labels, pred).ravel()
-        sen = tp / (tp + fn)
-        spe = tn / (tn + fp)
-        f1 = f1_score(labels, pred)
-        
-        return acc, auc, pre, sen, spe, f1
-
-
-def test1(model, path, datasets):
+def test(model, path, datasets):
     train_dataset, val_dataset = datasets
     model.load_state_dict(torch.load(path))
     model.eval()
@@ -107,8 +78,8 @@ def main(args):
         model = KMGCN(config, node_size, node_feature_size, timeseries_size, class_dim)
         model = model.to(device)
 
-        path = 'best_model_cn_ad%.pth'
-        acc = test1(model, path, datasets)
+        path = 'best_model_cn_ad.pth'
+        acc = test(model, path, datasets)
         print('acc:', acc)
         
 
