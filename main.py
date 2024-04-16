@@ -51,7 +51,6 @@ def test1(model, path, datasets):
     model.load_state_dict(torch.load(path))
     model.eval()
 
-    res = []
     count = 0
     for i in range(len(val_dataset)):
         data_in, pearson, pcorr, label, pseudo, age, gender = val_dataset[i]
@@ -74,7 +73,6 @@ def test1(model, path, datasets):
         sorted_similarity = sorted(similarity_list, key=lambda x: x[0], reverse=True)
 
         top_15_indices = [index for similarity, index in sorted_similarity[:15]]
-        # print('top_15_indices:',top_15_indices)
         for j in top_15_indices:
             train_data_in, train_pearson, train_pcorr, train_label, train_pseudo, train_age, train_gender = train_dataset[j]
             data_ins.append(train_data_in)
@@ -84,11 +82,6 @@ def test1(model, path, datasets):
             pseudos.append(train_pseudo)
             ages.append(train_age)
             genders.append(train_gender)
-
-        # top_15_samples = [self.train_dataset[index] for index in top_15_indices]    
-        # print('top_15_samples:', len(top_15_samples))
-
-
 
         data_ins, pearsons, pcorrs, labels, pseudos, ages, genders = [np.stack(d) for d in (data_ins, pearsons, pcorrs, labels, pseudos, ages, genders)]
         data_ins, pearsons, pcorrs, labels, pseudos, ages, genders = [torch.from_numpy(d).float() for d in (data_ins, pearsons, pcorrs, labels, pseudos, ages, genders)]
