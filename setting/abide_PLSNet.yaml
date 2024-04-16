@@ -7,8 +7,8 @@ data:
   train_set: 0.8
   val_set: 0.2
   fold: 0
-  time_seires: data/adni_cn_ad.npy
-  # time_seires: data/adni_cn_mci.npy
+  time_seires: data/adni_nc_ad.npy
+  # time_seires: data/adni_nc_mci.npy
   # time_seires: data/adni_mci_ad.npy 
 
 model:
