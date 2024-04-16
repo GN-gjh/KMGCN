@@ -78,7 +78,7 @@ def main(args):
         model = KMGCN(config, node_size, node_feature_size, timeseries_size, class_dim)
         model = model.to(device)
 
-        path = 'best_model_cn_ad.pth'
+        path = 'best_model_nc_ad.pth'
         acc = test(model, path, datasets)
         print('acc:', acc)
         
