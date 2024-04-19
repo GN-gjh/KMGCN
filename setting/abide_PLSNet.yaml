@@ -5,7 +5,7 @@ data:
   test_batch_size: 16
   val_batch_size: 16
   train_set: 0.8
-  val_set: 0.2
+  test_set: 0.2
   fold: 0
   time_seires: data/adni_nc_ad.npy
   # time_seires: data/adni_nc_mci.npy
@@ -16,14 +16,9 @@ model:
   extractor_type: attention
   embedding_size: 8
   window_size: 4
-
   cnn_pool_size: 16
-
   num_gru_layers: 4
-
   dropout: 0.5
-
-
 
 train:
   lr: 1.0e-4
@@ -37,6 +32,4 @@ train:
   sparsity_loss: true
   sparsity_loss_weight: 0.5e-4
   log_folder: result
-  
-  # uniform or pearson
   pure_gnn_graph: pearson
