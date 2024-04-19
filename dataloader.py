@@ -29,18 +29,13 @@ def init_dataloader(dataset_config):
     genders = data["gender"]
 
     _, _, timeseries = final_fc.shape                         
-
     _, node_size, node_feature_size = final_pearson.shape      
-
     scaler = StandardScaler(mean=np.mean(final_fc), std=np.std(final_fc))
-    
     final_fc = scaler.transform(final_fc)                      
 
-
-    pseudo = []     # 伪
+    pseudo = []     
     for i in range(len(final_fc)):
         pseudo.append(np.diag(np.ones(final_pearson.shape[1])))    
-
 
     if 'cc200' in  dataset_config['atlas']:
         pseudo_arr = np.concatenate(pseudo, axis=0).reshape((-1, 200, 200))            
@@ -52,10 +47,10 @@ def init_dataloader(dataset_config):
         pseudo_arr = np.concatenate(pseudo, axis=0).reshape((-1, 111, 111))
 
 
-    final_fc, final_pearson, final_pcorr, labels, pseudo_arr, ages, genders = [torch.from_numpy(d).float() for d in (final_fc, final_pearson, final_pcorr, labels, pseudo_arr, ages, genders)]      # 转为torch向量
+    final_fc, final_pearson, final_pcorr, labels, pseudo_arr, ages, genders = [torch.from_numpy(d).float() for d in (final_fc, final_pearson, final_pcorr, labels, pseudo_arr, ages, genders)]    
 
     length = final_fc.shape[0]
-    train_length = int(length*dataset_config["train_set"])      # 168
+    train_length = int(length*dataset_config["train_set"])      
 
     dataset = utils.TensorDataset(
         final_fc,
@@ -67,14 +62,14 @@ def init_dataloader(dataset_config):
         genders
     )
 
-    train_dataset, val_dataset = torch.utils.data.random_split(
+    train_dataset, test_dataset = torch.utils.data.random_split(
         dataset, [train_length, length-train_length])
 
     train_dataloader = utils.DataLoader(
         train_dataset, batch_size=dataset_config["batch_size"], shuffle=True, drop_last=True)
 
-    val_dataloader = utils.DataLoader(
-        val_dataset, batch_size=dataset_config["batch_size"], shuffle=True, drop_last=True)
+    test_dataloader = utils.DataLoader(
+        test_dataset, batch_size=dataset_config["batch_size"], shuffle=True, drop_last=True)
 
 
-    return (train_dataloader, val_dataloader), node_size, node_feature_size, timeseries, (train_dataset, val_dataset)
+    return (train_dataloader, test_dataloader), node_size, node_feature_size, timeseries, (train_dataset, test_dataset)
