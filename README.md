@@ -1,5 +1,5 @@
 # KMGCN
-The demonstration of KMGCN's pre-trained model during the inference stage.
+Demonstration of the model training and testing process.
 
 ## Usage
 
