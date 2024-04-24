@@ -14,7 +14,6 @@ data:
 
 model:
   name: KMGCN
-  extractor_type: attention
   embedding_size: 8
   window_size: 4
   cnn_pool_size: 16
