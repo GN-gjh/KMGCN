@@ -10,4 +10,4 @@ Demonstration of the model training and testing process.
 <https://pan.baidu.com/s/1JWg4utjrSrTHptL7DGkBRw?pwd=1024 >
 
 ### Run the reasoning process
-The tests are integrated in the file. Run `main.py`
+Training and testing models. Run `main.py`
