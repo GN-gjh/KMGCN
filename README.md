@@ -6,8 +6,8 @@ Demonstration of the model training and testing process.
 ### Install dependencies
   pip install -r requirements.txt
 
-### Download the pre-training file for NC vs. AD and our processed ADNI dataset
-<https://pan.baidu.com/s/1jGzt9JO3GZ9WXnysQ8iyuA?pwd=1024>
+### Download pre-processed ADNI dataset
+<https://pan.baidu.com/s/1JWg4utjrSrTHptL7DGkBRw?pwd=1024 >
 
 ### Run the reasoning process
 The tests are integrated in the file. Run `main.py`
