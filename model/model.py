@@ -61,7 +61,9 @@ class Population(nn.Module):
         x = x + pseudo             
         topk = 8
 
-        alpha = 0.9
+        a = 0.9
+        beta = 2
+        alpha = 0.1
         num_nodes = x.shape[0]
         dist = np.zeros((num_nodes, num_nodes))
         inds = []
@@ -69,13 +71,13 @@ class Population(nn.Module):
             vector1 = x[i].flatten()                                                
             for j in range(num_nodes):
                 vector2 = x[j].flatten() 
-                similarity = np.exp(-0.1*(np.linalg.norm(vector1.cpu().detach().numpy() - vector2.cpu().detach().numpy())))
-                if abs(ages[i] - ages[j]) <= 2 and genders[i] == genders[j]:
-                    dist[i][j] = similarity*alpha
+                similarity = np.exp(-alpha*(np.linalg.norm(vector1.cpu().detach().numpy() - vector2.cpu().detach().numpy())))
+                if abs(ages[i] - ages[j]) <= beta and genders[i] == genders[j]:
+                    dist[i][j] = similarity*a
                 else:
-                    dist[i][j] = similarity*(1-alpha)
+                    dist[i][j] = similarity*(1-a)
             ind = np.argpartition(dist[i, :], -topk)[-topk:]
-            inds.append(ind)                                        
+            inds.append(ind)                                         
 
 
         adj = np.zeros((num_nodes, num_nodes))                   
