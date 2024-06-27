@@ -59,7 +59,6 @@ def main(args):
         files = get_files_in_directory(directory_path)
         for path in files:
             acc = train_process.test(path)
-            print(acc)
             accs.append(acc)
         max_acc = max(accs)
         max_acc_index = accs.index(max_acc)
