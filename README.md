@@ -1,7 +1,7 @@
 # KMGCN
 Introduction
-This repository is based on our MIA paper: 《[Knowledge-driven multi-graph convolutional network for brain network analysis and
- potential biomarker discovery]》(https://www.sciencedirect.com/science/article/abs/pii/S1361841524002937).
+This repository is based on our MIA paper: [Knowledge-driven multi-graph convolutional network for brain network analysis and
+ potential biomarker discovery](https://www.sciencedirect.com/science/article/abs/pii/S1361841524002937).
 
 ## Usage
 Demonstration of the model training and testing process.
