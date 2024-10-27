@@ -273,13 +273,14 @@ class KMGCN(nn.Module):
         score = self.softmax(score)                           
 
 
-        _, idx = score.sort(dim=-1)                      
+        _, idx = score.sort(dim=-1)  
+        _, rank = idx.sort(dim=-1) 
 
         l = int(x.shape[1] * 0.7)
         x_p = torch.empty(bz, l, 8)
 
         for i in range(x.shape[0]):
-            x_p[i] = x[i, idx[i, :l], :]
+            x_p[i] = x[i, rank[i, :l], :]
 
         x = x_p.view(bz,-1).to(device)                        
 
